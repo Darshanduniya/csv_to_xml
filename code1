@@ -1,0 +1,31 @@
+import csv
+import xml.etree.ElementTree as ET
+
+def csv_to_xml(csv_file, xml_file):
+    # Read CSV and get headers
+    with open(csv_file, 'r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        root = ET.Element('Data')
+
+        print("CSV Input:")
+        sample_csv = file.read()
+        print(sample_csv)
+        file.seek(0)
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            item = ET.SubElement(root, 'Row')
+            for key, value in row.items():
+                ET.SubElement(item, key).text = value
+
+        tree = ET.ElementTree(root)
+        tree.write(xml_file, encoding='utf-8', xml_declaration=True)
+
+        # Print XML Output
+        print("\nXML Output:")
+        sample_output = ET.tostring(root, encoding='utf-8').decode('utf-8')
+        print(sample_output)
+
+# Example usage
+csv_to_xml('/data/duniya/supp.csv', '/data/duniya/supp_modified.xml')
+print("\nCSV converted to XML successfully!")
