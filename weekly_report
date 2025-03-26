@@ -1,0 +1,19 @@
+Weekly Report
+
+Tasks Completed:
+
+Implemented Spark Pool for all fact tasks in data load DAGs.
+
+Enabled re-try options for both projection and scoping tasks.
+
+Worked on Toy Mexico monthly and weekly industry reports, including setup and related activities.
+
+Developed a solution for converting CSV files to XML dynamically.
+
+Managed and optimized a stored-level Airflow DAG.
+
+Investigated and resolved issues related to load failures.
+
+Key Improvements:
+
+The implementation of Spark Pool helps manage resource utilization, preventing tasks from overwhelming the system.
