@@ -1,0 +1,36 @@
+import requests
+import xml.etree.ElementTree as ET
+
+def get_db_instances(param):
+    url = f"http://opnsg.ch3.prod.i.com/svc_data/getRltn?param1={param}"
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        raise Exception(f"Failed to fetch data. Status Code: {response.status_code}")
+
+    root = ET.fromstring(response.content)
+    
+    user = root.find('.//RLTNL_MRT_USERID').text
+    password = root.find('.//RLTNL_MRT_PASSWORD').text
+    database = root.find('.//RLTNL_SCHEMA_NAME').text
+    alias_url = root.find('.//RLTNL_SCHEMA_DB_ALIAS_URL').text
+
+    # Extract host and port from alias URL and use the actual database name from the URL
+    db_instances = []
+    for alias in alias_url.split('~'):
+        alias = alias.replace('mapi:monetdb://', '')
+        host_port, actual_database = alias.split('/')
+        host, port = host_port.split(':')
+        db_instances.append({
+            "host": host,
+            "database": actual_database,
+            "user": user,
+            "password": password,
+            "port": int(port)
+        })
+
+    return db_instances
+
+param = "MONETDBP87LPA"
+db_instance = get_db_instances(param)
+print(db_instance)
