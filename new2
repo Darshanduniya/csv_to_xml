@@ -1,0 +1,19 @@
+Subject: Database Connection and Data Extraction Script Completion
+
+Dear [Manager's Name],
+
+I have completed the implementation of the database connection and data extraction script. The script takes the DSN as a parameter, appends it to the URL, retrieves the response, and uses the extracted details to establish a database connection. The data is then stored in a designated directory.
+
+Script Details:
+
+Script Path: /path/to/your/script/db_instance_fetch.py
+
+Functionality: Connects to the database using URL response details and extracts data.
+
+DSN Input: Passed as a parameter during script execution.
+
+Output File Location:
+
+Directory: /npd/staging/fetch_monet_db_details/
+
+Output files 
